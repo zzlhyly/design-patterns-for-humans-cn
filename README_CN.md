@@ -20,18 +20,18 @@
 
 <br>
 
-|[创建型设计模式](#创建型设计模式)|[结构型设计模式](#结构型设计模式)|[行为型设计模式](#行为型设计模式)|
+|[创建型设计模式（Creational）](#创建型设计模式)|[结构型设计模式（Structural）](#结构型设计模式)|[行为型设计模式（Behavioral）](#行为型设计模式)|
 |:-|:-|:-|
-|[简单工厂](#-简单工厂)|[适配器](#-适配器)|[责任链](#-责任链)|
-|[工厂方法](#-工厂方法)|[桥接](#-桥接)|[命令](#-命令)|
-|[抽象工厂](#-抽象工厂)|[组合](#-组合)|[迭代器](#-迭代器)|
-|[建造者](#-建造者)|[装饰器](#-装饰器)|[中介者](#-中介者)|
-|[原型](#-原型)|[外观](#-外观)|[备忘录](#-备忘录)|
-|[单例](#-单例)|[享元](#-享元)|[观察者](#-观察者)|
-||[代理](#-代理)|[访问者](#-访问者)|
-|||[策略](#-策略)|
-|||[状态](#-状态)|
-|||[模板方法](#-模板方法)|
+|[简单工厂](#-简单工厂-simple-factory)|[适配器](#-适配器-adapter)|[责任链](#-责任链-chain-of-responsibility)|
+|[工厂方法](#-工厂方法-factory-method)|[桥接](#-桥接-bridge)|[命令](#-命令-command)|
+|[抽象工厂](#-抽象工厂-abstract-factory)|[组合](#-组合-composite)|[迭代器](#-迭代器-iterator)|
+|[建造者](#-建造者-builder)|[装饰器](#-装饰器-decorator)|[中介者](#-中介者-mediator)|
+|[原型](#-原型-prototype)|[外观](#-外观-facade)|[备忘录](#-备忘录-memento)|
+|[单例](#-单例-singleton)|[享元](#-享元-flyweight)|[观察者](#-观察者-observer)|
+||[代理](#-代理-proxy)|[访问者](#-访问者-visitor)|
+|||[策略](#-策略-strategy)|
+|||[状态](#-状态-state)|
+|||[模板方法](#-模板方法-template-method)|
 
 <br>
 
@@ -57,11 +57,11 @@
 设计模式类型
 -----------------
 
-* [创建型](#创建型设计模式)
-* [结构型](#结构型设计模式)
-* [行为型](#行为型设计模式)
+* [创建型](#创建型设计模式-creational-design-patterns)
+* [结构型](#结构型设计模式-structural-design-patterns)
+* [行为型](#行为型设计模式-behavioral-design-patterns)
 
-## 创建型设计模式
+## 创建型设计模式（Creational Design Patterns）
 
 通俗地说
 > 创建型模式专注于如何实例化一个对象或一组相关对象。
@@ -69,14 +69,14 @@
 维基百科说
 > 在软件工程中，创建型设计模式是处理对象创建机制的设计模式，试图以适合情况的方式创建对象。对象创建的基本形式可能导致设计问题或增加设计的复杂性。创建型设计模式通过某种方式控制这种对象创建来解决这个问题。
 
- * [简单工厂](#-简单工厂)
- * [工厂方法](#-工厂方法)
- * [抽象工厂](#-抽象工厂)
- * [建造者](#-建造者)
- * [原型](#-原型)
- * [单例](#-单例)
+ * [简单工厂](#-简单工厂-simple-factory)
+ * [工厂方法](#-工厂方法-factory-method)
+ * [抽象工厂](#-抽象工厂-abstract-factory)
+ * [建造者](#-建造者-builder)
+ * [原型](#-原型-prototype)
+ * [单例](#-单例-singleton)
 
-### 🏠 简单工厂
+### 🏠 简单工厂（Simple Factory）
 
 现实世界的例子
 > 假设你正在建造一栋房子，需要门。你可以穿上木匠的衣服，准备一些木材、胶水、钉子和所有制作门所需的工具，然后在你的房子里开始制作；或者你可以直接打电话给工厂，让他们把制作好的门送到你这里，这样你就不需要学习任何关于门制作的知识，也不需要处理制作过程中产生的混乱。
@@ -131,13 +131,13 @@ class DoorFactory
 ```
 然后可以这样使用
 ```php
-// 制作一个100x200的门
+// Make me a door of 100x200
 $door = DoorFactory::makeDoor(100, 200);
 
-echo '宽度: ' . $door->getWidth();
-echo '高度: ' . $door->getHeight();
+echo 'Width: ' . $door->getWidth();
+echo 'Height: ' . $door->getHeight();
 
-// 制作一个50x100的门
+// Make me a door of 50x100
 $door2 = DoorFactory::makeDoor(50, 100);
 ```
 
@@ -145,7 +145,7 @@ $door2 = DoorFactory::makeDoor(50, 100);
 
 当创建对象不仅仅是几个赋值操作，而是涉及一些逻辑时，将其放在专门的工厂中是有意义的，而不是在各处重复相同的代码。
 
-### 🏭 工厂方法
+### 🏭 工厂方法（Factory Method）
 
 现实世界的例子
 > 考虑招聘经理的情况。一个人不可能面试所有职位。根据职位空缺，她必须决定并将面试步骤委托给不同的人。
@@ -170,7 +170,7 @@ class Developer implements Interviewer
 {
     public function askQuestions()
     {
-        echo '询问设计模式相关问题！';
+        echo 'Asking about design patterns!';
     }
 }
 
@@ -178,7 +178,7 @@ class CommunityExecutive implements Interviewer
 {
     public function askQuestions()
     {
-        echo '询问社区建设相关问题';
+        echo 'Asking about community building';
     }
 }
 ```
@@ -189,7 +189,7 @@ class CommunityExecutive implements Interviewer
 abstract class HiringManager
 {
 
-    // 工厂方法
+    // Factory method
     abstract protected function makeInterviewer(): Interviewer;
 
     public function takeInterview()
@@ -222,17 +222,17 @@ class MarketingManager extends HiringManager
 
 ```php
 $devManager = new DevelopmentManager();
-$devManager->takeInterview(); // 输出: 询问设计模式相关问题
+$devManager->takeInterview(); // Output: Asking about design patterns
 
 $marketingManager = new MarketingManager();
-$marketingManager->takeInterview(); // 输出: 询问社区建设相关问题。
+$marketingManager->takeInterview(); // Output: Asking about community building.
 ```
 
 **何时使用？**
 
 当类中有一些通用处理，但所需的子类在运行时动态决定时很有用。换句话说，当客户端不知道它可能需要什么确切的子类时。
 
-### 🔨 抽象工厂
+### 🔨 抽象工厂（Abstract Factory）
 
 现实世界的例子
 > 扩展我们简单工厂中的门示例。根据你的需求，你可能从木门店获得木门，从铁门店获得铁门，或者从相关商店获得PVC门。此外，你可能需要具有不同专业技能的人来安装门，例如木匠安装木门，焊工安装铁门等。正如你所看到的，门之间现在存在依赖关系，木门需要木匠，铁门需要焊工等。
@@ -257,7 +257,7 @@ class WoodenDoor implements Door
 {
     public function getDescription()
     {
-        echo '我是一扇木门';
+        echo 'I am a wooden door';
     }
 }
 
@@ -265,7 +265,7 @@ class IronDoor implements Door
 {
     public function getDescription()
     {
-        echo '我是一扇铁门';
+        echo 'I am an iron door';
     }
 }
 ```
@@ -281,7 +281,7 @@ class Welder implements DoorFittingExpert
 {
     public function getDescription()
     {
-        echo '我只能安装铁门';
+        echo 'I can only fit iron doors';
     }
 }
 
@@ -289,7 +289,7 @@ class Carpenter implements DoorFittingExpert
 {
     public function getDescription()
     {
-        echo '我只能安装木门';
+        echo 'I can only fit wooden doors';
     }
 }
 ```
@@ -302,7 +302,7 @@ interface DoorFactory
     public function makeFittingExpert(): DoorFittingExpert;
 }
 
-// 木门工厂返回木匠和木门
+// Wooden factory to return carpenter and wooden door
 class WoodenDoorFactory implements DoorFactory
 {
     public function makeDoor(): Door
@@ -316,7 +316,7 @@ class WoodenDoorFactory implements DoorFactory
     }
 }
 
-// 铁门工厂获取铁门和相关安装专家
+// Iron door factory to get iron door and the relevant fitting expert
 class IronDoorFactory implements DoorFactory
 {
     public function makeDoor(): Door
@@ -337,17 +337,17 @@ $woodenFactory = new WoodenDoorFactory();
 $door = $woodenFactory->makeDoor();
 $expert = $woodenFactory->makeFittingExpert();
 
-$door->getDescription();  // 输出: 我是一扇木门
-$expert->getDescription(); // 输出: 我只能安装木门
+$door->getDescription();  // Output: I am a wooden door
+$expert->getDescription(); // Output: I can only fit wooden doors
 
-// 铁门工厂相同
+// Same for Iron Factory
 $ironFactory = new IronDoorFactory();
 
 $door = $ironFactory->makeDoor();
 $expert = $ironFactory->makeFittingExpert();
 
-$door->getDescription();  // 输出: 我是一扇铁门
-$expert->getDescription(); // 输出: 我只能安装铁门
+$door->getDescription();  // Output: I am an iron door
+$expert->getDescription(); // Output: I can only fit iron doors
 ```
 
 正如你所看到的，木门工厂封装了 `木匠` 和 `木门`，铁门工厂也封装了 `铁门` 和 `焊工`。这有助于我们确保对于每扇创建的门，我们不会得到错误的安装专家。
@@ -356,7 +356,7 @@ $expert->getDescription(); // 输出: 我只能安装铁门
 
 当存在相互关联的依赖关系，且涉及不太简单的创建逻辑时。
 
-### 👷 建造者
+### 👷 建造者（Builder）
 
 现实世界的例子
 > 想象你在肯德基，你点了一个特定的套餐，比如"大份肯德基"，他们没有任何疑问就递给你；这是简单工厂的例子。但有些情况下创建逻辑可能涉及更多步骤。例如，你想要一个定制的赛百味套餐，你有几个关于汉堡制作方式的选项，比如你想要什么面包？你想要什么类型的酱料？你想要什么奶酪？在这种情况下，建造者模式就派上用场了。
@@ -463,7 +463,7 @@ $burger = (new BurgerBuilder(14))
 
 当对象可能有多种变体时，以及为了避免构造函数可伸缩。与工厂模式的关键区别是：工厂模式用于创建是单步过程的情况，而建造者模式用于创建是多步过程的情况。
 
-### 🐑 原型
+### 🐑 原型（Prototype）
 
 现实世界的例子
 > 还记得多莉吗？那只被克隆的羊！让我们不要深入细节，但关键是这都是关于克隆的。
@@ -519,7 +519,7 @@ $original = new Sheep('Jolly');
 echo $original->getName(); // Jolly
 echo $original->getCategory(); // Mountain Sheep
 
-// 克隆并修改所需内容
+// Clone and modify what is required
 $cloned = clone $original;
 $cloned->setName('Dolly');
 echo $cloned->getName(); // Dolly
@@ -532,7 +532,7 @@ echo $cloned->getCategory(); // Mountain sheep
 
 当需要类似于现有对象的对象时，或者当创建比克隆更昂贵时。
 
-### 💍 单例
+### 💍 单例（Singleton）
 
 现实世界的例子
 > 一个国家一次只能有一个总统。每当职责召唤时，都必须让同一个总统行动起来。这里的总统是单例。
@@ -555,7 +555,7 @@ final class President
 
     private function __construct()
     {
-        // 隐藏构造函数
+        // Hide the constructor
     }
 
     public static function getInstance(): President
@@ -569,12 +569,12 @@ final class President
 
     private function __clone()
     {
-        // 禁用克隆
+        // Disable cloning
     }
 
     private function __wakeup()
     {
-        // 禁用反序列化
+        // Disable unserialize
     }
 }
 ```
@@ -586,7 +586,7 @@ $president2 = President::getInstance();
 var_dump($president1 === $president2); // true
 ```
 
-## 结构型设计模式
+## 结构型设计模式（Structural Design Patterns）
 
 通俗地说
 > 结构型模式主要关注对象组合，或者换句话说，实体如何相互使用。另一种解释是，它们有助于回答"如何构建软件组件？"
@@ -594,15 +594,15 @@ var_dump($president1 === $president2); // true
 维基百科说
 > 在软件工程中，结构型设计模式是通过识别实现关系之间的简单方法来简化设计的设计模式。
 
- * [适配器](#-适配器)
- * [桥接](#-桥接)
- * [组合](#-组合)
- * [装饰器](#-装饰器)
- * [外观](#-外观)
- * [享元](#-享元)
- * [代理](#-代理)
+ * [适配器](#-适配器-adapter)
+ * [桥接](#-桥接-bridge)
+ * [组合](#-组合-composite)
+ * [装饰器](#-装饰器-decorator)
+ * [外观](#-外观-facade)
+ * [享元](#-享元-flyweight)
+ * [代理](#-代理-proxy)
 
-### 🔌 适配器
+### 🔌 适配器（Adapter）
 
 现实世界的例子
 > 假设你有一些图片在存储卡中，需要将它们传输到计算机。为了传输它们，你需要某种与计算机端口兼容的适配器，以便可以将存储卡连接到计算机。在这种情况下，读卡器就是适配器。
@@ -655,7 +655,7 @@ class Hunter
 现在假设我们必须在游戏中添加一个 `WildDog`，以便猎人也可以猎杀它。但我们不能直接这样做，因为狗有不同的接口。为了使它对我们的猎人兼容，我们必须创建一个兼容的适配器
 
 ```php
-// 这需要添加到游戏中
+// This needs to be added to the game
 class WildDog
 {
     public function bark()
@@ -663,7 +663,7 @@ class WildDog
     }
 }
 
-// 围绕野狗的适配器，使其与我们的游戏兼容
+// Adapter around wild dog to make it compatible with our game
 class WildDogAdapter implements Lion
 {
     protected $dog;
@@ -689,7 +689,7 @@ $hunter = new Hunter();
 $hunter->hunt($wildDogAdapter);
 ```
 
-### 🚡 桥接
+### 🚡 桥接（Bridge）
 
 现实世界的例子
 > 假设你有一个包含不同页面的网站，你应该允许用户更改主题。你会怎么做？为每个主题创建每个页面的多个副本，还是只创建单独的主题并根据用户偏好加载它们？桥接模式允许你做后者，即：
@@ -724,7 +724,7 @@ class About implements WebPage
 
     public function getContent()
     {
-        return "关于页面使用 " . $this->theme->getColor();
+        return "About page in " . $this->theme->getColor();
     }
 }
 
@@ -739,7 +739,7 @@ class Careers implements WebPage
 
     public function getContent()
     {
-        return "职业页面使用 " . $this->theme->getColor();
+        return "Careers page in " . $this->theme->getColor();
     }
 }
 ```
@@ -754,21 +754,21 @@ class DarkTheme implements Theme
 {
     public function getColor()
     {
-        return '深黑色';
+        return 'Dark Black';
     }
 }
 class LightTheme implements Theme
 {
     public function getColor()
     {
-        return '米白色';
+        return 'Off white';
     }
 }
 class AquaTheme implements Theme
 {
     public function getColor()
     {
-        return '浅蓝色';
+        return 'Light blue';
     }
 }
 ```
@@ -779,11 +779,11 @@ $darkTheme = new DarkTheme();
 $about = new About($darkTheme);
 $careers = new Careers($darkTheme);
 
-echo $about->getContent(); // "关于页面使用深黑色";
-echo $careers->getContent(); // "职业页面使用深黑色";
+echo $about->getContent(); // "About page in Dark Black";
+echo $careers->getContent(); // "Careers page in Dark Black";
 ```
 
-### 🌿 组合
+### 🌿 组合（Composite）
 
 现实世界的例子
 > 每个组织都由员工组成。每个员工都有相同的特征，即有工资、有一些职责、可能向某人汇报，也可能有一些下属等。
@@ -903,19 +903,19 @@ class Organization
 然后可以这样使用
 
 ```php
-// 准备员工
+// Prepare the employees
 $john = new Developer('John Doe', 12000);
 $jane = new Designer('Jane Doe', 15000);
 
-// 将他们添加到组织
+// Add them to organization
 $organization = new Organization();
 $organization->addEmployee($john);
 $organization->addEmployee($jane);
 
-echo "净工资: " . $organization->getNetSalaries(); // 净工资: 27000
+echo "Net salaries: " . $organization->getNetSalaries(); // Net Salaries: 27000
 ```
 
-### ☕ 装饰器
+### ☕ 装饰器（Decorator）
 
 现实世界的例子
 
@@ -947,7 +947,7 @@ class SimpleCoffee implements Coffee
 
     public function getDescription()
     {
-        return '简单咖啡';
+        return 'Simple coffee';
     }
 }
 ```
@@ -969,7 +969,7 @@ class MilkCoffee implements Coffee
 
     public function getDescription()
     {
-        return $this->coffee->getDescription() . '，牛奶';
+        return $this->coffee->getDescription() . ', milk';
     }
 }
 
@@ -989,7 +989,7 @@ class WhipCoffee implements Coffee
 
     public function getDescription()
     {
-        return $this->coffee->getDescription() . '，奶油';
+        return $this->coffee->getDescription() . ', whip';
     }
 }
 
@@ -1009,7 +1009,7 @@ class VanillaCoffee implements Coffee
 
     public function getDescription()
     {
-        return $this->coffee->getDescription() . '，香草';
+        return $this->coffee->getDescription() . ', vanilla';
     }
 }
 ```
@@ -1019,22 +1019,22 @@ class VanillaCoffee implements Coffee
 ```php
 $someCoffee = new SimpleCoffee();
 echo $someCoffee->getCost(); // 10
-echo $someCoffee->getDescription(); // 简单咖啡
+echo $someCoffee->getDescription(); // Simple Coffee
 
 $someCoffee = new MilkCoffee($someCoffee);
 echo $someCoffee->getCost(); // 12
-echo $someCoffee->getDescription(); // 简单咖啡，牛奶
+echo $someCoffee->getDescription(); // Simple Coffee, milk
 
 $someCoffee = new WhipCoffee($someCoffee);
 echo $someCoffee->getCost(); // 17
-echo $someCoffee->getDescription(); // 简单咖啡，牛奶，奶油
+echo $someCoffee->getDescription(); // Simple Coffee, milk, whip
 
 $someCoffee = new VanillaCoffee($someCoffee);
 echo $someCoffee->getCost(); // 20
-echo $someCoffee->getDescription(); // 简单咖啡，牛奶，奶油，香草
+echo $someCoffee->getDescription(); // Simple Coffee, milk, whip, vanilla
 ```
 
-### 📦 外观
+### 📦 外观（Facade）
 
 现实世界的例子
 > 你如何打开电脑？"按下电源按钮"你会说！这就是你所相信的，因为你正在使用电脑外部提供的简单接口，内部它必须做很多事情才能实现。这种复杂子系统的简单接口就是外观。
@@ -1054,37 +1054,37 @@ class Computer
 {
     public function getElectricShock()
     {
-        echo "哎哟！";
+        echo "Ouch!";
     }
 
     public function makeSound()
     {
-        echo "哔哔！";
+        echo "Beep beep!";
     }
 
     public function showLoadingScreen()
     {
-        echo "加载中..";
+        echo "Loading..";
     }
 
     public function bam()
     {
-        echo "准备就绪！";
+        echo "Ready to be used!";
     }
 
     public function closeEverything()
     {
-        echo "嗡嗡嗡！";
+        echo "Bup bup bup buzzzz!";
     }
 
     public function sooth()
     {
-        echo "滋滋滋";
+        echo "Zzzzz";
     }
 
     public function pullCurrent()
     {
-        echo "哈啊！";
+        echo "Haaah!";
     }
 }
 ```
@@ -1118,11 +1118,11 @@ class ComputerFacade
 现在使用外观
 ```php
 $computer = new ComputerFacade(new Computer());
-$computer->turnOn(); // 哎哟！哔哔！加载中.. 准备就绪！
-$computer->turnOff(); // 嗡嗡嗡！哈啊！滋滋滋
+$computer->turnOn(); // Ouch! Beep beep! Loading.. Ready to be used!
+$computer->turnOff(); // Bup bup buzzz! Haah! Zzzzz
 ```
 
-### 🍃 享元
+### 🍃 享元（Flyweight）
 
 现实世界的例子
 > 你曾经在某个摊位喝过新鲜的茶吗？他们通常会制作超过你需求的一杯，并为其他顾客节省剩余的资源，例如燃气等。享元模式就是关于共享的。
@@ -1138,13 +1138,13 @@ $computer->turnOff(); // 嗡嗡嗡！哈啊！滋滋滋
 翻译上面的茶示例。首先我们有茶类型和茶制作者
 
 ```php
-// 任何将被缓存的都是享元。
-// 这里的茶类型将是享元。
+// Anything that will be cached is flyweight.
+// Types of tea here will be flyweights.
 class KarakTea
 {
 }
 
-// 充当工厂并保存茶
+// Acts as a factory and saves the tea
 class TeaMaker
 {
     protected $availableTea = [];
@@ -1181,7 +1181,7 @@ class TeaShop
     public function serve()
     {
         foreach ($this->orders as $table => $tea) {
-            echo "为第 " . $table . " 桌上茶";
+            echo "Serving tea to table# " . $table;
         }
     }
 }
@@ -1192,17 +1192,17 @@ class TeaShop
 $teaMaker = new TeaMaker();
 $shop = new TeaShop($teaMaker);
 
-$shop->takeOrder('少糖', 1);
-$shop->takeOrder('多奶', 2);
-$shop->takeOrder('无糖', 5);
+$shop->takeOrder('less sugar', 1);
+$shop->takeOrder('more milk', 2);
+$shop->takeOrder('without sugar', 5);
 
 $shop->serve();
-// 为第 1 桌上茶
-// 为第 2 桌上茶
-// 为第 5 桌上茶
+// Serving tea to table# 1
+// Serving tea to table# 2
+// Serving tea to table# 5
 ```
 
-### 🎱 代理
+### 🎱 代理（Proxy）
 
 现实世界的例子
 > 你曾经使用门禁卡通过门吗？打开那扇门有多种选择，即可以使用门禁卡打开，也可以按下绕过安全系统的按钮。门的主要功能是打开，但在其上添加了代理以添加一些功能。让我用下面的代码示例更好地解释它。
@@ -1228,12 +1228,12 @@ class LabDoor implements Door
 {
     public function open()
     {
-        echo "打开实验室门";
+        echo "Opening lab door";
     }
 
     public function close()
     {
-        echo "关闭实验室门";
+        echo "Closing the lab door";
     }
 }
 ```
@@ -1253,7 +1253,7 @@ class SecuredDoor implements Door
         if ($this->authenticate($password)) {
             $this->door->open();
         } else {
-            echo "不行！这不可能。";
+            echo "Big no! It ain't possible.";
         }
     }
 
@@ -1271,14 +1271,14 @@ class SecuredDoor implements Door
 可以这样使用
 ```php
 $door = new SecuredDoor(new LabDoor());
-$door->open('invalid'); // 不行！这不可能。
+$door->open('invalid'); // Big no! It ain't possible.
 
-$door->open('$ecr@t'); // 打开实验室门
-$door->close(); // 关闭实验室门
+$door->open('$ecr@t'); // Opening lab door
+$door->close(); // Closing lab door
 ```
 另一个例子是某种数据映射器实现。例如，我最近使用这种模式为MongoDB制作了一个ODM（对象数据映射器），我在其中围绕mongo类编写了一个代理，同时利用魔术方法 `__call()`。所有方法调用都被代理到原始mongo类，检索到的结果按原样返回，但在 `find` 或 `findOne` 的情况下，数据被映射到所需的类对象，并且返回对象而不是 `Cursor`。
 
-## 行为型设计模式
+## 行为型设计模式（Behavioral Design Patterns）
 
 通俗地说
 > 它关注对象之间的责任分配。与结构型模式的不同之处在于，它们不仅指定结构，还概述了它们之间消息传递/通信的模式。换句话说，它们有助于回答"如何在软件组件中运行行为？"
@@ -1286,18 +1286,18 @@ $door->close(); // 关闭实验室门
 维基百科说
 > 在软件工程中，行为型设计模式是识别对象之间常见通信模式并实现这些模式的设计模式。通过这样做，这些模式增加了执行此通信的灵活性。
 
-* [责任链](#-责任链)
-* [命令](#-命令)
-* [迭代器](#-迭代器)
-* [中介者](#-中介者)
-* [备忘录](#-备忘录)
-* [观察者](#-观察者)
-* [访问者](#-访问者)
-* [策略](#-策略)
-* [状态](#-状态)
-* [模板方法](#-模板方法)
+* [责任链](#-责任链-chain-of-responsibility)
+* [命令](#-命令-command)
+* [迭代器](#-迭代器-iterator)
+* [中介者](#-中介者-mediator)
+* [备忘录](#-备忘录-memento)
+* [观察者](#-观察者-observer)
+* [访问者](#-访问者-visitor)
+* [策略](#-策略-strategy)
+* [状态](#-状态-state)
+* [模板方法](#-模板方法-template-method)
 
-### 🔗 责任链
+### 🔗 责任链（Chain of Responsibility）
 
 现实世界的例子
 > 例如，你在账户中设置了三种支付方式（`A`、`B` 和 `C`）；每种都有不同的金额。`A` 有100美元，`B` 有300美元，`C` 有1000美元，支付偏好选择为 `A` 然后 `B` 然后 `C`。你尝试购买价值210美元的东西。使用责任链，首先检查账户 `A` 是否可以进行购买，如果是，则进行购买并且链将被打破。如果不是，请求将转发到账户 `B` 检查金额，如果是，则链将被打破，否则请求将继续转发，直到找到合适的处理程序。这里 `A`、`B` 和 `C` 是链的链接，整个现象就是责任链。
@@ -1326,12 +1326,12 @@ abstract class Account
     public function pay(float $amountToPay)
     {
         if ($this->canPay($amountToPay)) {
-            echo sprintf('使用 %s 支付了 %s' . PHP_EOL, get_called_class(), $amountToPay);
+            echo sprintf('Paid %s using %s' . PHP_EOL, $amountToPay, get_called_class());
         } elseif ($this->successor) {
-            echo sprintf('无法使用 %s 支付。继续..' . PHP_EOL, get_called_class());
+            echo sprintf('Cannot pay using %s. Proceeding ..' . PHP_EOL, get_called_class());
             $this->successor->pay($amountToPay);
         } else {
-            throw new Exception('没有账户有足够的余额');
+            throw new Exception('None of the accounts have enough balance');
         }
     }
 
@@ -1375,31 +1375,31 @@ class Bitcoin extends Account
 现在让我们使用上面定义的链接（即银行、Paypal、比特币）准备链
 
 ```php
-// 让我们准备一个像下面这样的链
+// Let's prepare a chain like below
 //      $bank->$paypal->$bitcoin
 //
-// 第一优先级银行
-//      如果银行无法支付，则使用Paypal
-//      如果Paypal无法支付，则使用比特币
+// First priority bank
+//      If bank can't pay then paypal
+//      If paypal can't pay then bit coin
 
-$bank = new Bank(100);          // 余额为100的银行
-$paypal = new Paypal(200);      // 余额为200的Paypal
-$bitcoin = new Bitcoin(300);    // 余额为300的比特币
+$bank = new Bank(100);          // Bank with balance 100
+$paypal = new Paypal(200);      // Paypal with balance 200
+$bitcoin = new Bitcoin(300);    // Bitcoin with balance 300
 
 $bank->setNext($paypal);
 $paypal->setNext($bitcoin);
 
-// 让我们尝试使用第一优先级即银行支付
+// Let's try to pay using the first priority i.e. bank
 $bank->pay(259);
 
-// 输出将是
+// Output will be
 // ==============
-// 无法使用 Bank 支付。继续..
-// 无法使用 Paypal 支付。继续..
-// 使用 Bitcoin 支付了 259
+// Cannot pay using bank. Proceeding ..
+// Cannot pay using paypal. Proceeding ..:
+// Paid 259 using Bitcoin!
 ```
 
-### 👮 命令
+### 👮 命令（Command）
 
 现实世界的例子
 > 一个通用的例子是你在餐厅点餐。你（即 `客户端`）要求服务员（即 `调用者`）带一些食物（即 `命令`），服务员只是将请求转发给厨师（即 `接收者`），他知道做什么以及如何烹饪。
@@ -1415,17 +1415,17 @@ $bank->pay(259);
 
 首先我们有接收者，它具有可以执行的每个操作的实现
 ```php
-// 接收者
+// Receiver
 class Bulb
 {
     public function turnOn()
     {
-        echo "灯泡已点亮";
+        echo "Bulb has been lit";
     }
 
     public function turnOff()
     {
-        echo "一片黑暗！";
+        echo "Darkness!";
     }
 }
 ```
@@ -1438,7 +1438,7 @@ interface Command
     public function redo();
 }
 
-// 命令
+// Command
 class TurnOn implements Command
 {
     protected $bulb;
@@ -1491,7 +1491,7 @@ class TurnOff implements Command
 ```
 然后我们有一个 `调用者`，客户端将与之交互以处理任何命令
 ```php
-// 调用者
+// Invoker
 class RemoteControl
 {
     public function submit(Command $command)
@@ -1508,13 +1508,13 @@ $turnOn = new TurnOn($bulb);
 $turnOff = new TurnOff($bulb);
 
 $remote = new RemoteControl();
-$remote->submit($turnOn); // 灯泡已点亮！
-$remote->submit($turnOff); // 一片黑暗！
+$remote->submit($turnOn); // Bulb has been lit!
+$remote->submit($turnOff); // Darkness!
 ```
 
 命令模式也可用于实现基于事务的系统。你在执行命令时立即维护命令历史记录。如果最终命令成功执行，则一切正常，否则只需遍历历史记录并对所有已执行的命令执行 `undo`。
 
-### ➿ 迭代器
+### ➿ 迭代器（Iterator）
 
 现实世界的例子
 > 旧收音机将是迭代器的一个很好的例子，用户可以从某个频道开始，然后使用下一个或上一个按钮浏览相应的频道。或者以MP3播放器或电视机为例，你可以按下下一个和上一个按钮浏览连续的频道，或者换句话说，它们都提供了一个接口来迭代相应的频道、歌曲或电台。
@@ -1616,10 +1616,10 @@ foreach($stationList as $station) {
     echo $station->getFrequency() . PHP_EOL;
 }
 
-$stationList->removeStation(new RadioStation(89)); // 将移除89电台
+$stationList->removeStation(new RadioStation(89)); // Will remove station 89
 ```
 
-### 👽 中介者
+### 👽 中介者（Mediator）
 
 现实世界的例子
 > 一个通用的例子是当你通过手机与某人交谈时，有一个网络提供商坐在你们之间，你们的对话通过它而不是直接发送。在这种情况下，网络提供商是中介者。
@@ -1642,7 +1642,7 @@ interface ChatRoomMediator
     public function showMessage(User $user, string $message);
 }
 
-// 中介者
+// Mediator
 class ChatRoom implements ChatRoomMediator
 {
     public function showMessage(User $user, string $message)
@@ -1682,15 +1682,15 @@ $mediator = new ChatRoom();
 $john = new User('John Doe', $mediator);
 $jane = new User('Jane Doe', $mediator);
 
-$john->send('你好！');
-$jane->send('嘿！');
+$john->send('Hi there!');
+$jane->send('Hey!');
 
-// 输出将是
-// Feb 14, 10:58 [John]: 你好！
-// Feb 14, 10:58 [Jane]: 嘿！
+// Output will be
+// Feb 14, 10:58 [John]: Hi there!
+// Feb 14, 10:58 [Jane]: Hey!
 ```
 
-### 💾 备忘录
+### 💾 备忘录（Memento）
 
 现实世界的例子
 > 以计算器（即发起者）为例，每当你执行某些计算时，最后一次计算都会保存在内存（即备忘录）中，以便你可以返回到它，并可能使用某些操作按钮（即管理者）恢复它。
@@ -1760,26 +1760,26 @@ class Editor
 ```php
 $editor = new Editor();
 
-// 输入一些内容
-$editor->type('这是第一句话。');
-$editor->type('这是第二句。');
+// Type some stuff
+$editor->type('This is the first sentence.');
+$editor->type('This is second.');
 
-// 保存状态以恢复到：这是第一句话。这是第二句。
+// Save the state to restore to : This is the first sentence. This is second.
 $saved = $editor->save();
 
-// 再输入一些
-$editor->type('这是第三句。');
+// Type some more
+$editor->type('And this is third.');
 
-// 输出：保存前的内容
-echo $editor->getContent(); // 这是第一句话。这是第二句。这是第三句。
+// Output: Content before Saving
+echo $editor->getContent(); // This is the first sentence. This is second. And this is third.
 
-// 恢复到上次保存的状态
+// Restoring to last saved state
 $editor->restore($saved);
 
-$editor->getContent(); // 这是第一句话。这是第二句。
+$editor->getContent(); // This is the first sentence. This is second.
 ```
 
-### 😎 观察者
+### 😎 观察者（Observer）
 
 现实世界的例子
 > 一个很好的例子是求职者，他们订阅某个招聘网站，每当有匹配的工作机会时都会收到通知。
@@ -1831,8 +1831,8 @@ class JobSeeker implements Observer
 
     public function onJobPosted(JobPost $job)
     {
-        // 对职位发布做一些处理
-        echo '嗨 ' . $this->name . '！新职位发布：'. $job->getTitle();
+        // Do something with the job posting
+        echo 'Hi ' . $this->name . '! New job posted: '. $job->getTitle();
     }
 }
 ```
@@ -1862,24 +1862,24 @@ class EmploymentAgency implements Observable
 ```
 然后可以这样使用
 ```php
-// 创建订阅者
+// Create subscribers
 $johnDoe = new JobSeeker('John Doe');
 $janeDoe = new JobSeeker('Jane Doe');
 
-// 创建发布者并附加订阅者
+// Create publisher and attach subscribers
 $jobPostings = new EmploymentAgency();
 $jobPostings->attach($johnDoe);
 $jobPostings->attach($janeDoe);
 
-// 添加新职位并查看订阅者是否收到通知
-$jobPostings->addJob(new JobPost('软件工程师'));
+// Add a new job and see if subscribers get notified
+$jobPostings->addJob(new JobPost('Software Engineer'));
 
-// 输出
-// 嗨 John Doe！新职位发布：软件工程师
-// 嗨 Jane Doe！新职位发布：软件工程师
+// Output
+// Hi John Doe! New job posted: Software Engineer
+// Hi Jane Doe! New job posted: Software Engineer
 ```
 
-### 🏃 访问者
+### 🏃 访问者（Visitor）
 
 现实世界的例子
 > 考虑有人访问迪拜。他们只需要一种方式（即签证）进入迪拜。到达后，他们可以自己参观迪拜的任何地方，无需请求许可或做任何准备工作即可参观这里的任何地方；只要告诉他们一个地方，他们就可以参观它。访问者模式让你做到这一点，它帮助你添加要参观的地方，以便他们可以尽可能多地参观，而无需做任何准备工作。
@@ -1895,13 +1895,13 @@ $jobPostings->addJob(new JobPost('软件工程师'));
 让我们以动物园模拟为例，我们有几种不同类型的动物，我们必须让它们发出声音。让我们使用访问者模式来翻译这个
 
 ```php
-// 被访问者
+// Visitee
 interface Animal
 {
     public function accept(AnimalOperation $operation);
 }
 
-// 访问者
+// Visitor
 interface AnimalOperation
 {
     public function visitMonkey(Monkey $monkey);
@@ -1915,7 +1915,7 @@ class Monkey implements Animal
 {
     public function shout()
     {
-        echo '喔喔喔！';
+        echo 'Ooh oo aa aa!';
     }
 
     public function accept(AnimalOperation $operation)
@@ -1928,7 +1928,7 @@ class Lion implements Animal
 {
     public function roar()
     {
-        echo '吼吼吼！';
+        echo 'Roaaar!';
     }
 
     public function accept(AnimalOperation $operation)
@@ -1941,7 +1941,7 @@ class Dolphin implements Animal
 {
     public function speak()
     {
-        echo '嘟嘟嘟！';
+        echo 'Tuut tuttu tuutt!';
     }
 
     public function accept(AnimalOperation $operation)
@@ -1979,9 +1979,9 @@ $dolphin = new Dolphin();
 
 $speak = new Speak();
 
-$monkey->accept($speak);    // 喔喔喔！    
-$lion->accept($speak);      // 吼吼吼！
-$dolphin->accept($speak);   // 嘟嘟嘟！
+$monkey->accept($speak);    // Ooh oo aa aa!    
+$lion->accept($speak);      // Roaaar!
+$dolphin->accept($speak);   // Tuut tutt tuutt!
 ```
 我们本可以通过为动物创建继承层次结构来简单地做到这一点，但那样每当我们要向动物添加新操作时，都必须修改动物。但现在我们不必更改它们。例如，假设我们被要求向动物添加跳跃行为，我们只需创建一个新的访问者即可添加，即
 
@@ -1990,17 +1990,17 @@ class Jump implements AnimalOperation
 {
     public function visitMonkey(Monkey $monkey)
     {
-        echo '跳了20英尺高！跳到树上！';
+        echo 'Jumped 20 feet high! on to the tree!';
     }
 
     public function visitLion(Lion $lion)
     {
-        echo '跳了7英尺！回到地面！';
+        echo 'Jumped 7 feet! Back on the ground!';
     }
 
     public function visitDolphin(Dolphin $dolphin)
     {
-        echo '在水上走了一会儿就消失了';
+        echo 'Walked on water a little and disappeared';
     }
 }
 ```
@@ -2008,17 +2008,17 @@ class Jump implements AnimalOperation
 ```php
 $jump = new Jump();
 
-$monkey->accept($speak);   // 喔喔喔！
-$monkey->accept($jump);    // 跳了20英尺高！跳到树上！
+$monkey->accept($speak);   // Ooh oo aa aa!
+$monkey->accept($jump);    // Jumped 20 feet high! on to the tree!
 
-$lion->accept($speak);     // 吼吼吼！
-$lion->accept($jump);      // 跳了7英尺！回到地面！
+$lion->accept($speak);     // Roaaar!
+$lion->accept($jump);      // Jumped 7 feet! Back on the ground!
 
-$dolphin->accept($speak);  // 嘟嘟嘟！
-$dolphin->accept($jump);   // 在水上走了一会儿就消失了
+$dolphin->accept($speak);  // Tuut tutt tuutt!
+$dolphin->accept($jump);   // Walked on water a little and disappeared
 ```
 
-### 💡 策略
+### 💡 策略（Strategy）
 
 现实世界的例子
 > 考虑排序的例子，我们实现了冒泡排序，但数据开始增长，冒泡排序开始变得非常慢。为了解决这个问题，我们实现了快速排序。但现在尽管快速排序算法对大型数据集表现更好，但对小型数据集来说非常慢。为了处理这个问题，我们实现了一种策略，即对于小型数据集使用冒泡排序，对于大型数据集使用快速排序。
@@ -2043,9 +2043,9 @@ class BubbleSortStrategy implements SortStrategy
 {
     public function sort(array $dataset): array
     {
-        echo "使用冒泡排序";
+        echo "Sorting using bubble sort";
 
-        // 执行排序
+        // Do sorting
         return $dataset;
     }
 }
@@ -2054,9 +2054,9 @@ class QuickSortStrategy implements SortStrategy
 {
     public function sort(array $dataset): array
     {
-        echo "使用快速排序";
+        echo "Sorting using quick sort";
 
-        // 执行排序
+        // Do sorting
         return $dataset;
     }
 }
@@ -2092,12 +2092,12 @@ $bigdataset = [1, 4, 3, 2, 8, 10, 5, 6, 9, 7];
 
 $sorter = new Sorter(new BubbleSortStrategy(), new QuickSortStrategy());
 
-$sorter->sort($smalldataset); // 输出：使用冒泡排序
+$sorter->sort($smalldataset); // Output : Sorting using bubble sort
 
-$sorter->sort($bigdataset); // 输出：使用快速排序
+$sorter->sort($bigdataset); // Output : Sorting using quick sort
 ```
 
-### 💢 状态
+### 💢 状态（State）
 
 现实世界的例子
 > 想象你正在使用某个绘图应用程序，你选择画笔来绘制。现在画笔会根据所选颜色改变其行为，即如果你选择了红色，它将以红色绘制，如果选择了蓝色，则将以蓝色绘制，等等。
@@ -2120,22 +2120,22 @@ interface PhoneState {
     public function dial(): PhoneState;
 }
 
-// 状态实现
+// states implementation
 class PhoneStateIdle implements PhoneState {
     public function pickUp(): PhoneState {
         return new PhoneStatePickedUp();
     }
     public function hangUp(): PhoneState {
-        throw new Exception("已经是空闲状态");
+        throw new Exception("already idle");
     }
     public function dial(): PhoneState {
-        throw new Exception("无法在空闲状态下拨号");
+        throw new Exception("unable to dial in idle state");
     }
 }
 
 class PhoneStatePickedUp implements PhoneState {
     public function pickUp(): PhoneState {
-        throw new Exception("已经拿起");
+        throw new Exception("already picked up");
     }
     public function hangUp(): PhoneState {
         return new PhoneStateIdle();
@@ -2147,13 +2147,13 @@ class PhoneStatePickedUp implements PhoneState {
 
 class PhoneStateCalling implements PhoneState {
     public function pickUp(): PhoneState {
-        throw new Exception("已经拿起");
+        throw new Exception("already picked up");
     }
     public function hangUp(): PhoneState {
         return new PhoneStateIdle();
     }
     public function dial(): PhoneState {
-        throw new Exception("正在拨号中");
+        throw new Exception("already dialing");
     }
 }
 ```
@@ -2188,7 +2188,7 @@ $phone->pickUp();
 $phone->dial();
 ```
 
-### 📒 模板方法
+### 📒 模板方法（Template Method）
 
 现实世界的例子
 > 假设我们正在建造一栋房子。建造步骤可能如下：
@@ -2214,7 +2214,7 @@ $phone->dial();
 abstract class Builder
 {
 
-    // 模板方法
+    // Template method
     final public function build()
     {
         $this->test();
@@ -2237,22 +2237,22 @@ class AndroidBuilder extends Builder
 {
     public function test()
     {
-        echo '运行Android测试';
+        echo 'Running android tests';
     }
 
     public function lint()
     {
-        echo '检查Android代码';
+        echo 'Linting the android code';
     }
 
     public function assemble()
     {
-        echo '组装Android构建';
+        echo 'Assembling the android build';
     }
 
     public function deploy()
     {
-        echo '部署Android构建到服务器';
+        echo 'Deploying android build to server';
     }
 }
 
@@ -2260,22 +2260,22 @@ class IosBuilder extends Builder
 {
     public function test()
     {
-        echo '运行iOS测试';
+        echo 'Running ios tests';
     }
 
     public function lint()
     {
-        echo '检查iOS代码';
+        echo 'Linting the ios code';
     }
 
     public function assemble()
     {
-        echo '组装iOS构建';
+        echo 'Assembling the ios build';
     }
 
     public function deploy()
     {
-        echo '部署iOS构建到服务器';
+        echo 'Deploying ios build to server';
     }
 }
 ```
@@ -2285,20 +2285,20 @@ class IosBuilder extends Builder
 $androidBuilder = new AndroidBuilder();
 $androidBuilder->build();
 
-// 输出：
-// 运行Android测试
-// 检查Android代码
-// 组装Android构建
-// 部署Android构建到服务器
+// Output:
+// Running android tests
+// Linting the android code
+// Assembling the android build
+// Deploying android build to server
 
 $iosBuilder = new IosBuilder();
 $iosBuilder->build();
 
-// 输出：
-// 运行iOS测试
-// 检查iOS代码
-// 组装iOS构建
-// 部署iOS构建到服务器
+// Output:
+// Running ios tests
+// Linting the ios code
+// Assembling the ios build
+// Deploying ios build to server
 ```
 
 ## 🚦 总结
