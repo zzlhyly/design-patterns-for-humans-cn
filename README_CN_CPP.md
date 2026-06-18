@@ -470,7 +470,7 @@ Burger burger = BurgerBuilder(14)
 
 **编程示例**
 
-在PHP中，可以使用 `clone` 轻松完成
+在C++中，可以使用 `clone` 轻松完成
 
 ```cpp
 #include <string>
@@ -1396,7 +1396,7 @@ remote.submit(&turnOff);  // Darkness!
 
 **编程示例**
 
-在PHP中，使用SPL（标准PHP库）很容易实现。翻译上面的电台示例。首先我们有 `RadioStation`
+在C++中，使用STL（标准模板库）很容易实现。翻译上面的电台示例。首先我们有 `RadioStation`
 
 ```cpp
 class RadioStation
