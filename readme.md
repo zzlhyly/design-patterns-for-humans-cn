@@ -8,6 +8,8 @@
 > **Note:** This is a backup of the original project [design-patterns-for-humans](https://github.com/nilbuild/design-patterns-for-humans) with additional Chinese translation.
 >
 > 📖 [中文版 (Chinese Version)](./README_CN.md)
+>
+> 📖 [中文 C++ 版本 (Chinese C++ Version)](./README_CN_CPP.md)
 
 ***
 
